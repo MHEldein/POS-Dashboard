@@ -10,11 +10,11 @@ public class ProfilePage {
     private WebDriverWait wait;
     private WebDriver driver;
 
-    public ProfilePage(WebDriver driver){
-        this.driver =  driver;
+    public ProfilePage(WebDriver driver) {
+        this.driver = driver;
     }
 
-    public String getPageTittle(){
+    public String getPageTittle() {
         wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(titlle));
         return driver.findElement(titlle).getText();

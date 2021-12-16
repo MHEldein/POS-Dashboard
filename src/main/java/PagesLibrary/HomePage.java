@@ -19,17 +19,17 @@ public class HomePage {
     private WebDriver driver;
     private WebDriverWait wait;
 
-    public HomePage(WebDriver driver){
-        this.driver=driver;
+    public HomePage(WebDriver driver) {
+        this.driver = driver;
     }
 
-    public boolean getMenuContainerStatus(){
+    public boolean getMenuContainerStatus() {
         wait = new WebDriverWait(driver, 5);
         wait.until(ExpectedConditions.visibilityOfElementLocated(container));
         return driver.findElement(container).isDisplayed();
     }
 
-    public ProfilePage navToProfile(){
+    public ProfilePage navToProfile() {
         wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(userMenu));
         driver.findElement(userMenu).click();
@@ -37,36 +37,36 @@ public class HomePage {
         return new ProfilePage(driver);
     }
 
-    public LoginPage logout(){
+    public LoginPage logout() {
         wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(userMenu));
         driver.findElement(userMenu).click();
         wait.until(ExpectedConditions.elementToBeClickable(logout)).click();
         return new LoginPage(driver);
     }
-    public void changeLanguage(String lang){
+
+    public void changeLanguage(String lang) {
         wait = new WebDriverWait(driver, 5);
         wait.until(ExpectedConditions.visibilityOfElementLocated(langMenu));
         driver.findElement(langMenu).click();
-        if (lang == "ar"){
+        if (lang == "ar") {
             driver.findElement(arabicLang).click();
-        }
-        else if (lang == "en"){
+        } else if (lang == "en") {
             driver.findElement(englishLang).click();
-        }
-        else{
+        } else {
             System.out.println("wrong language choice");
         }
     }
-    public String getHomePageTittle(){
+
+    public String getHomePageTittle() {
         return driver.findElement(homeTittle).getText();
     }
 
-    public String getHomePageUrl(){
+    public String getHomePageUrl() {
         return driver.getCurrentUrl();
     }
 
-    public GeneralSettings NavToGeneralSettings(){
+    public GeneralSettings NavToGeneralSettings() {
         wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(management));
         driver.findElement(management).click();
