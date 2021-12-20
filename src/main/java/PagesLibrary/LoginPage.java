@@ -9,17 +9,17 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.ArrayList;
 
 public class LoginPage {
+    private final WebDriver driver;
+    private final By url = By.partialLinkText("www.facebook.com");
+    private final By microtecLogo = By.xpath("//body/app-root[1]/app-authentication[1]/app-login[1]/div[1]/div[1]/div[2]/img[1]");
+    private final By username = By.xpath("/html[1]/body[1]/app-root[1]/app-authentication[1]/app-login[1]/div[1]/div[1]/form[1]/div[1]/div[1]/mat-form-field[1]/div[1]/div[1]/div[3]/input[1]");
+    private final By password = By.cssSelector("#mat-input-1");
+    private final By loginButton = By.xpath("//body/app-root[1]/app-authentication[1]/app-login[1]/div[1]/div[1]/form[1]/div[2]/div[1]/button[1]");
+    private final By userMenu = By.xpath("//app-header/nav[1]/div[1]/ul[1]/button[1]");
+    private final By viewPW = By.xpath("//mat-icon[contains(text(),'visibility')]");
+    private final By rememberMe = By.xpath("//body/app-root[1]/app-authentication[1]/app-login[1]/div[1]/div[1]/form[1]/div[1]/div[1]/mat-checkbox[1]/label[1]/span[1]");
+    private final By newTab = By.tagName("body");
     WebDriverWait wait;
-    private WebDriver driver;
-    private By url = By.partialLinkText("www.facebook.com");
-    private By microtecLogo = By.xpath("//body/app-root[1]/app-authentication[1]/app-login[1]/div[1]/div[1]/div[2]/img[1]");
-    private By username = By.xpath("/html[1]/body[1]/app-root[1]/app-authentication[1]/app-login[1]/div[1]/div[1]/form[1]/div[1]/div[1]/mat-form-field[1]/div[1]/div[1]/div[3]/input[1]");
-    private By password = By.cssSelector("#mat-input-1");
-    private By loginButton = By.xpath("//body/app-root[1]/app-authentication[1]/app-login[1]/div[1]/div[1]/form[1]/div[2]/div[1]/button[1]");
-    private By userMenu = By.xpath("//app-header/nav[1]/div[1]/ul[1]/button[1]");
-    private By viewPW = By.xpath("//mat-icon[contains(text(),'visibility')]");
-    private By rememberMe = By.xpath("//body/app-root[1]/app-authentication[1]/app-login[1]/div[1]/div[1]/form[1]/div[1]/div[1]/mat-checkbox[1]/label[1]/span[1]");
-    private By newTab = By.tagName("body");
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;

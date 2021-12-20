@@ -9,22 +9,22 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class GeneralSettings {
-    private By pageTittle = By.xpath("//div[contains(text(),'General Setting')]");
-    private By uploadImage = By.className("fileInputProfile");
-    private By companyArabicName = By.id("mat-input-2");
-    private By fieldName = By.className("label-form");
-    private By form = By.xpath("//mat-tab-body/div[1]/app-basic-setting[1]/form[1]/div[1]/div[2]");
-    private By companyLatinName = By.id("mat-input-3");
-    private By alert = By.className("ng-nts-c21-258");
-    private By save = By.className("btn-submitted");
-    private By VAT = By.id("mat-input-4");
-    private By country = By.xpath("//mat-tab-body/div[1]/app-basic-setting[1]/form[1]/div[1]/div[2]/div[1]/div[4]/div[1]/mat-form-field[1]/div[1]/div[1]/div[3]");
-    private By currency = By.xpath("//mat-tab-body/div[1]/app-basic-setting[1]/form[1]/div[1]/div[2]/div[1]/div[5]/div[1]/mat-form-field[1]/div[1]/div[1]/div[3]");
-    private By vatList = By.xpath("//mat-tab-body/div[1]/app-basic-setting[1]/form[1]/div[1]/div[2]/div[1]/div[6]/div[1]/mat-form-field[1]/div[1]/div[1]/div[3]");
-    private WebDriver driver;
-
+    private final By pageTittle = By.xpath("//div[contains(text(),'General Setting')]");
+    private final By uploadImage = By.className("fileInputProfile");
+    private final By companyArabicName = By.id("mat-input-2");
+    private final By companyLatinName = By.id("mat-input-3");
+    private final By alert = By.className("ng-nts-c21-258");
+    private final By save = By.className("btn-submitted");
+    private final By VAT = By.id("mat-input-4");
+    private final By country = By.xpath("//mat-tab-body/div[1]/app-basic-setting[1]/form[1]/div[1]/div[2]/div[1]/div[4]/div[1]/mat-form-field[1]/div[1]/div[1]/div[3]");
+    private final By currency = By.xpath("//mat-tab-body/div[1]/app-basic-setting[1]/form[1]/div[1]/div[2]/div[1]/div[5]/div[1]/mat-form-field[1]/div[1]/div[1]/div[3]");
+    private final By vatList = By.xpath("//mat-tab-body/div[1]/app-basic-setting[1]/form[1]/div[1]/div[2]/div[1]/div[6]/div[1]/mat-form-field[1]/div[1]/div[1]/div[3]");
+    private final By timeList = By.xpath("//mat-tab-body/div[1]/app-basic-setting[1]/form[1]/div[1]/div[2]/div[1]/div[7]/div[1]/mat-form-field[1]/div[1]/div[1]");
+    private final By inactiveText = By.xpath("//input[@id='mat-input-5']");
+    private final By priceVat = By.xpath("//label[contains(text(),'السعر شامل الضريبه')]");
+    private final WebDriver driver;
+    private WebElement element;
     private WebDriverWait wait;
-    private Actions act;
 
     public GeneralSettings(WebDriver driver) {
         this.driver = driver;
@@ -44,9 +44,9 @@ public class GeneralSettings {
     }
 
     public void save() {
-        WebElement Element = driver.findElement(save);
+        element = driver.findElement(save);
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView(true);", Element);
+        js.executeScript("arguments[0].scrollIntoView(true);", element);
         wait.until(ExpectedConditions.elementToBeClickable(save)).click();
     }
 
@@ -68,7 +68,7 @@ public class GeneralSettings {
 
     public void updateTextField(By location, String txt) {
         wait = new WebDriverWait(driver, 10);
-        WebElement elem = wait.until(ExpectedConditions.presenceOfElementLocated(location));
+        element = wait.until(ExpectedConditions.presenceOfElementLocated(location));
         driver.findElement(location).clear();
         driver.findElement(location).sendKeys(txt);
         this.save();
@@ -76,22 +76,86 @@ public class GeneralSettings {
 
     public void changeCountry(String countryName) {
         wait = new WebDriverWait(driver, 10);
-        WebElement elem = wait.until(ExpectedConditions.presenceOfElementLocated(country));
+        element = wait.until(ExpectedConditions.presenceOfElementLocated(country));
         driver.findElement(country).click();
         driver.findElement(By.xpath("//span[contains(text(),'" + countryName + "')]")).click();
     }
 
     public void changeCurrency(String currencyName) {
         wait = new WebDriverWait(driver, 10);
-        WebElement elem = wait.until(ExpectedConditions.presenceOfElementLocated(currency));
+        element = wait.until(ExpectedConditions.presenceOfElementLocated(currency));
         driver.findElement(currency).click();
         driver.findElement(By.xpath("//span[contains(text(),'" + currencyName + "')]")).click();
     }
 
-    public void changeVAT(String vatName){
+    public void changeVAT(String vatName) {
         wait = new WebDriverWait(driver, 10);
-        WebElement elem = wait.until(ExpectedConditions.presenceOfElementLocated(vatList));
+        element = wait.until(ExpectedConditions.presenceOfElementLocated(vatList));
         driver.findElement(vatList).click();
-        driver.findElement(By.xpath("//span[contains(text(),'"+vatName+"')]")).click();
+        driver.findElement(By.xpath("//span[contains(text(),'" + vatName + "')]")).click();
+    }
+
+    public void changeTimeZone(String timeZoneName) {
+        wait = new WebDriverWait(driver, 10);
+        element = wait.until(ExpectedConditions.presenceOfElementLocated(timeList));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", element);
+        element.click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'" + timeZoneName + "')]"))).click();
+        this.save();
+    }
+
+    public void changeInactive(String inactiveTime) {
+        wait = new WebDriverWait(driver, 10);
+        element = wait.until(ExpectedConditions.presenceOfElementLocated(inactiveText));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", element);
+        this.updateTextField(inactiveText, inactiveTime);
+        this.save();
+    }
+
+    public void togglePriceIncludeVat(String choice) {
+        wait = new WebDriverWait(driver, 10);
+        element = wait.until(ExpectedConditions.presenceOfElementLocated(priceVat));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", element);
+        if (choice == "yes") {
+            driver.findElement(By.xpath("//mat-radio-button[@id='mat-radio-3']")).click();
+        } else if (choice == "no") {
+            driver.findElement(By.xpath("//mat-radio-button[@id='mat-radio-2']")).click();
+        }
+        this.save();
+    }
+
+    public String getCompanyArName() {
+        return driver.findElement(companyArabicName).getAttribute("value");
+    }
+
+    public String getCompanyLatinName() {
+        return driver.findElement(companyLatinName).getAttribute("value");
+    }
+
+    public String getCompanyIdentityNo() {
+        return driver.findElement(VAT).getAttribute("value");
+    }
+
+    public String getCountryName() {
+        return driver.findElement(country).getText();
+    }
+
+    public String getCurrency() {
+        return driver.findElement(currency).getText();
+    }
+
+    public String getVatType() {
+        return driver.findElement(vatList).getText();
+    }
+
+    public String getTimeZone() {
+        return driver.findElement(timeList).getText();
+    }
+
+    public String getInactiveTime() {
+        return driver.findElement(inactiveText).getAttribute("value");
     }
 }
