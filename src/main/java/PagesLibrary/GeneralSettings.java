@@ -43,6 +43,7 @@ public class GeneralSettings {
     }
 
     public void save() {
+        wait = new WebDriverWait(driver, 10);
         element = driver.findElement(save);
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView(true);", element);
@@ -67,7 +68,7 @@ public class GeneralSettings {
 
     public void updateTextField(By location, String txt) {
         wait = new WebDriverWait(driver, 10);
-        element = wait.until(ExpectedConditions.presenceOfElementLocated(location));
+        element = wait.until(ExpectedConditions.visibilityOfElementLocated(location));
         driver.findElement(location).clear();
         driver.findElement(location).sendKeys(txt);
         this.save();
@@ -100,17 +101,17 @@ public class GeneralSettings {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView(true);", element);
         element.click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains(text(),'" + timeZoneName + "')]"))).click();
-        this.save();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'" + timeZoneName + "')]"))).click();
+        driver.findElement(save).click();
     }
 
     public void changeInactive(String inactiveTime) {
         wait = new WebDriverWait(driver, 10);
-        element = wait.until(ExpectedConditions.presenceOfElementLocated(inactiveText));
+        element = wait.until(ExpectedConditions.visibilityOfElementLocated(inactiveText));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView(true);", element);
         this.updateTextField(inactiveText, inactiveTime);
-        this.save();
+        driver.findElement(save).click();
     }
 
     public void togglePriceIncludeVat(String choice) {

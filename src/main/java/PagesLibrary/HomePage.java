@@ -12,7 +12,7 @@ public class HomePage {
     private final By container = By.xpath("//body/div[@id='wrapper']/div[@id='content-wrapper']/div[@id='content']/div[@id='main-content']/app-menu[1]/nav[1]/ul[1]");
     private final By userMenu = By.xpath("//app-header/nav[1]/div[1]/ul[1]/button[1]");
     private final By profile = By.className("fa-user-circle");
-    private final By logout = By.xpath("//body[1]/div[3]/div[2]/div[1]/div[1]/div[1]/button[2]");
+    private final By logout = By.className("fa-sign-out-alt");
     private final By langMenu = By.xpath("//app-header/nav[1]/div[1]/div[1]/button[1]");
     private final By arabicLang = By.xpath("//body/div[3]/div[2]/div[1]/div[1]/div[1]/button[1]");
     private final By englishLang = By.xpath("//body/div[3]/div[2]/div[1]/div[1]/div[1]/button[2]");
@@ -39,17 +39,15 @@ public class HomePage {
 
     public ProfilePage navToProfile() {
         wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(userMenu));
-        driver.findElement(userMenu).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(userMenu)).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(profile)).click();
         return new ProfilePage(driver);
     }
 
     public LoginPage logout() {
         wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(userMenu));
-        driver.findElement(userMenu).click();
-        wait.until(ExpectedConditions.elementToBeClickable(logout)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(userMenu)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(logout)).click();
         return new LoginPage(driver);
     }
 

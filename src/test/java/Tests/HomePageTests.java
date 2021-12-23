@@ -45,8 +45,8 @@ public class HomePageTests extends TestsBase {
     @Test
     public void verifyChooseStatisticalPeriod() {
         homePage = loginPage.login("admin", "P@ssw0rd");
-        homePage.toggleStatisticalPeriod("year");
-        assertEquals(homePage.getSelectedPeriod(), "العام");
+        homePage.toggleStatisticalPeriod("today");
+        assertEquals(homePage.getSelectedPeriod(), "اليوم");
     }
 
 }

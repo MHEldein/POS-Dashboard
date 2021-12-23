@@ -35,7 +35,8 @@ public class LoginPage {
     }
 
     public boolean getLoginLogoStatus() {
-        return driver.findElement(microtecLogo).isDisplayed();
+        wait = new WebDriverWait(driver, 10);
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(microtecLogo)).isDisplayed();
     }
 
     public void clickViewPassword() {
