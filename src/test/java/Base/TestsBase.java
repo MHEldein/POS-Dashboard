@@ -3,6 +3,7 @@ package Base;
 import PagesLibrary.LoginPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 public class TestsBase {
@@ -18,7 +19,7 @@ public class TestsBase {
         loginPage = new LoginPage(driver);
     }
 
-    //@AfterMethod
+    @AfterMethod
     public void tearDown() {
         driver.quit();
     }

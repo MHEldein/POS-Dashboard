@@ -54,8 +54,8 @@ public class GeneralPageTests extends TestsBase {
     public void verifyChangeCurrency() {
         homePage = loginPage.login("admin", "P@ssw0rd");
         generalSettings = homePage.NavToGeneralSettings();
-        generalSettings.changeCurrency("HTG");
-        assertEquals(generalSettings.getCurrency(), "HTG");
+        generalSettings.changeCurrency("ERN");
+        assertEquals(generalSettings.getCurrency(), "ERN");
     }
 
     @Test
@@ -70,8 +70,8 @@ public class GeneralPageTests extends TestsBase {
     public void verifyChangeTimeZone() {
         homePage = loginPage.login("admin", "P@ssw0rd");
         generalSettings = homePage.NavToGeneralSettings();
-        generalSettings.changeTimeZone("(GMT+04:30) Kabul");
-        assertEquals(generalSettings.getTimeZone(), "(GMT+04:30) Kabul");
+        generalSettings.changeTimeZone("(GMT+08:00) Kuala Lumpur, Singapore");
+        assertEquals(generalSettings.getTimeZone(), "(GMT+08:00) Kuala Lumpur, Singapore");
     }
 
     @Test

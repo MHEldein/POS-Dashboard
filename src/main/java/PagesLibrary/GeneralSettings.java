@@ -4,12 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class GeneralSettings {
-    private final By pageTittle = By.xpath("//div[contains(text(),'General Setting')]");
+    private final By pageTittle = By.className("mt-2");
     private final By uploadImage = By.className("fileInputProfile");
     private final By companyArabicName = By.id("mat-input-2");
     private final By companyLatinName = By.id("mat-input-3");

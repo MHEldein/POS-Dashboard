@@ -18,7 +18,7 @@ public class HomePageTests extends TestsBase {
     public void verifyNavToProfile() {
         homePage = loginPage.login("admin", "P@ssw0rd");
         profilePage = homePage.navToProfile();
-        assertEquals(profilePage.getPageTittle(), "Profile");
+        assertEquals(profilePage.getPageTittle(), "الملف الشخصى");
     }
 
     @Test(priority = 1)
@@ -32,14 +32,21 @@ public class HomePageTests extends TestsBase {
     public void verifyChangeLanguage() {
         homePage = loginPage.login("admin", "P@ssw0rd");
         homePage.changeLanguage("en");
-        assertEquals(homePage.getHomePageTittle(), "نقاط البيع");
+        assertEquals(homePage.getHomePageTittle(), "Point of sales");
     }
 
     @Test(priority = 3)
     public void verifySuccessfulNavToGeneralSettings() {
         homePage = loginPage.login("admin", "P@ssw0rd");
         generalSettings = homePage.NavToGeneralSettings();
-        assertEquals(generalSettings.getPageTittle(), "General Setting");
+        assertEquals(generalSettings.getPageTittle(), "الإعدادات العامة");
+    }
+
+    @Test
+    public void verifyChooseStatisticalPeriod() {
+        homePage = loginPage.login("admin", "P@ssw0rd");
+        homePage.toggleStatisticalPeriod("year");
+        assertEquals(homePage.getSelectedPeriod(), "العام");
     }
 
 }
