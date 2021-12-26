@@ -30,8 +30,8 @@ public class GeneralPageTests extends TestsBase {
     public void verifyUpdateCompanyArabicName() {
         homePage = loginPage.login("admin", "P@ssw0rd");
         generalSettings = homePage.NavToGeneralSettings();
-        generalSettings.updateCompanyArabicName("شركة جديدة");
-        assertEquals(generalSettings.getCompanyArName(), "شركة جديدة");
+        generalSettings.updateCompanyArabicName("شركة");
+        assertEquals(generalSettings.getCompanyArName(), "شركة");
     }
 
     @Test
@@ -86,6 +86,6 @@ public class GeneralPageTests extends TestsBase {
     public void verifyTogglePriceIncludeVat() {
         homePage = loginPage.login("admin", "P@ssw0rd");
         generalSettings = homePage.NavToGeneralSettings();
-        generalSettings.togglePriceIncludeVat("yes");
+        generalSettings.togglePriceIncludeVat("no");
     }
 }

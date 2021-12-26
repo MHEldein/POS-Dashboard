@@ -20,7 +20,7 @@ public class GeneralSettings {
     private final By vatList = By.xpath("//mat-tab-body/div[1]/app-basic-setting[1]/form[1]/div[1]/div[2]/div[1]/div[6]/div[1]/mat-form-field[1]/div[1]/div[1]/div[3]");
     private final By timeList = By.xpath("//mat-tab-body/div[1]/app-basic-setting[1]/form[1]/div[1]/div[2]/div[1]/div[7]/div[1]/mat-form-field[1]/div[1]/div[1]");
     private final By inactiveText = By.xpath("//input[@id='mat-input-5']");
-    private final By priceVat = By.xpath("//label[contains(text(),'السعر شامل الضريبه')]");
+    private final By priceVat = By.xpath("//label[contains(text(),'السعر شامل الضريبة')]");
     private final WebDriver driver;
     private WebElement element;
     private WebDriverWait wait;
@@ -68,7 +68,8 @@ public class GeneralSettings {
 
     public void updateTextField(By location, String txt) {
         wait = new WebDriverWait(driver, 10);
-        element = wait.until(ExpectedConditions.visibilityOfElementLocated(location));
+        element = wait.until(ExpectedConditions.elementToBeClickable(location));
+        //driver.findElement(location).click();
         driver.findElement(location).clear();
         driver.findElement(location).sendKeys(txt);
         this.save();
@@ -111,7 +112,6 @@ public class GeneralSettings {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView(true);", element);
         this.updateTextField(inactiveText, inactiveTime);
-        driver.findElement(save).click();
     }
 
     public void togglePriceIncludeVat(String choice) {
@@ -120,11 +120,11 @@ public class GeneralSettings {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView(true);", element);
         if (choice == "yes") {
-            driver.findElement(By.xpath("//mat-radio-button[@id='mat-radio-3']")).click();
+            driver.findElement(By.cssSelector("#mat-radio-3")).click();
         } else if (choice == "no") {
-            driver.findElement(By.xpath("//mat-radio-button[@id='mat-radio-2']")).click();
+            driver.findElement(By.cssSelector("#mat-radio-2")).click();
         }
-        this.save();
+        driver.findElement(save).click();
     }
 
     public String getCompanyArName() {

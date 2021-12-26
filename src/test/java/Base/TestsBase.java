@@ -19,8 +19,8 @@ public class TestsBase {
         loginPage = new LoginPage(driver);
     }
 
-    @AfterMethod
+    /*@AfterMethod
     public void tearDown() {
         driver.quit();
-    }
+    }*/
 }
