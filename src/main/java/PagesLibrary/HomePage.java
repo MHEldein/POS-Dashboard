@@ -1,6 +1,5 @@
 package PagesLibrary;
 
-import com.sun.jdi.PrimitiveValue;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,13 +14,13 @@ public class HomePage {
     private final By profile = By.className("fa-user-circle");
     private final By logout = By.className("fa-sign-out-alt");
     private final By langMenu = By.xpath("//app-header/nav[1]/div[1]/div[1]/button[1]");
-    private final By arabicLang = By.xpath("//body/div[3]/div[2]/div[1]/div[1]/div[1]/button[1]");
-    private final By englishLang = By.xpath("//body/div[3]/div[2]/div[1]/div[1]/div[1]/button[2]");
+    private final By arabicLang = By.xpath("//body/div[2]/div[2]/div[1]/div[1]/div[1]/button[1]");
+    private final By englishLang = By.xpath("//body/div[2]/div[2]/div[1]/div[1]/div[1]/button[2]");
     private final By homeTittle = By.xpath("//body/div[@id='wrapper']/div[@id='content-wrapper']/div[@id='content']/div[@id='main-content']/app-menu[1]/div[1]");
     private final By management = By.cssSelector("body.sidebar-toggled:nth-child(2) div.d-flex.flex-column div.container-fluid:nth-child(2) nav.navbar.navbar-expand.navbar-light.bg-white.mainbar.mt-4.mb-4.static-top.shadow.rounded.d-none.d-md-block.d-lg-block:nth-child(1) ul.navbar-nav.justify-content-center div.d-inline-block.dropdown:nth-child(1) button.dropdown-toggle.btn.btn-test > span.d-none.d-lg-inline.text-gray-6000.small");
     private final By generalSettings = By.xpath("//body/div[@id='wrapper']/div[@id='content-wrapper']/div[@id='content']/div[@id='main-content']/app-menu[1]/nav[1]/ul[1]/div[1]/div[1]/div[1]/a[1]");
     private final WebDriver driver;
-    private By masterBranch =  By.xpath("//body[1]/div[3]/div[2]/div[1]/div[1]/div[1]/mat-option[2]/span[1]");
+    private By masterBranch = By.xpath("//body[1]/div[3]/div[2]/div[1]/div[1]/div[1]/mat-option[2]/span[1]");
     private By nasrBranch = By.xpath("//body[1]/div[3]/div[2]/div[1]/div[1]/div[1]/mat-option[3]/span[1]");
     private By allTime = By.xpath("//li[contains(text(),'جميع الاوقات')]");
     private By year = By.xpath("//li[contains(text(),'العام')]");
@@ -120,26 +119,24 @@ public class HomePage {
         return selectedPeriod;
     }
 
-    public void chooseBranch(String branchName){
+    public void chooseBranch(String branchName) {
         wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(branch)).click();
-        if (branchName == "master branch"){
+        if (branchName == "master branch") {
             wait.until(ExpectedConditions.visibilityOfElementLocated(masterBranch)).click();
-        }
-        else if (branchName == "nasr branch"){
+        } else if (branchName == "nasr branch") {
             wait.until(ExpectedConditions.visibilityOfElementLocated(nasrBranch)).click();
-        }
-        else {
+        } else {
             System.out.println("that branch does not exist");
         }
     }
 
-    public String getSelectedBranch(){
+    public String getSelectedBranch() {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(branch)).getText();
     }
 
-    public ProductsPage navToProducts(){
-        wait = new WebDriverWait(driver,10);
+    public ProductsPage navToProducts() {
+        wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(menu)).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(products)).click();
         return new ProductsPage(driver);

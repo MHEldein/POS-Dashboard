@@ -5,6 +5,8 @@
             <class name="Tests.GeneralPageTests"></class>
             <class name="Tests.HomePageTests"></class>
             <class name="Tests.LoginsPageTests"></class>
+            <class name="Tests.ProductPageTests"></class>
+            <class name="Tests.AddProductPageTests"></class>
         </classes>
     </test>
 </suite>

@@ -52,14 +52,14 @@ public class HomePageTests extends TestsBase {
     }
 
     @Test
-    public void verifyBranchSelection(){
+    public void verifyBranchSelection() {
         homePage = loginPage.login("admin", "P@ssw0rd");
         homePage.chooseBranch("nasr branch");
         assertEquals(homePage.getSelectedBranch(), "مدينة نصر");
     }
 
     @Test
-    public void verifySuccessfulNavToProducts(){
+    public void verifySuccessfulNavToProducts() {
         homePage = loginPage.login("admin", "P@ssw0rd");
         productsPage = homePage.navToProducts();
         assertEquals(productsPage.getPageTitle(), "المنتاجات");

@@ -37,8 +37,7 @@ public class GeneralSettings {
 
     public void upload(String path) {
         wait = new WebDriverWait(driver, 5);
-        wait.until(ExpectedConditions.presenceOfElementLocated(uploadImage));
-        driver.findElement(uploadImage).sendKeys(path);
+        wait.until(ExpectedConditions.presenceOfElementLocated(uploadImage)).sendKeys(path);
         this.save();
     }
 

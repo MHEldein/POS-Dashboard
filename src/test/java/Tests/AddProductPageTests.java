@@ -10,8 +10,9 @@ public class AddProductPageTests extends TestsBase {
     private HomePage homePage;
     private ProductsPage productsPage;
     private AddProductPage addProductPage;
+
     @Test
-    public void verifySeccessfulUpload(){
+    public void verifySeccessfulUpload() {
         homePage = loginPage.login("admin", "P@ssw0rd");
         productsPage = homePage.navToProducts();
         addProductPage = productsPage.navToAddProduct();
