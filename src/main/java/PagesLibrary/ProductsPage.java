@@ -1,7 +1,9 @@
 package PagesLibrary;
 
-import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -19,6 +21,9 @@ public class ProductsPage {
     private By applyFilter = By.className("btn-apply");
     private By groupFilter = By.xpath("//body/div[@id='wrapper']/div[@id='content-wrapper']/div[@id='content']/div[@id='main-content']/div[1]/div[1]/app-product-list[1]/mat-drawer-container[1]/mat-drawer[1]/div[1]/app-product-filter[1]/div[1]/div[3]/div[1]/app-genaric-select[1]/mat-form-field[1]/div[1]/div[1]/div[3]");
     private By groupChoice = By.className("mat-option-multiple");
+    private By kanban = By.xpath("//mat-icon[contains(text(),'view_module')]");
+    private By kanbanCard = By.className("grid-card");
+    private By list = By.xpath("//body/div[@id='wrapper']/div[@id='content-wrapper']/div[@id='content']/div[@id='main-content']/div[1]/div[1]/app-product-list[1]/mat-drawer-container[1]/mat-drawer-content[1]/app-list-view[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/button[1]/mat-icon[1]");
 
     public ProductsPage(WebDriver driver) {
         this.driver = driver;
@@ -46,8 +51,8 @@ public class ProductsPage {
         return new FilterResultPage(driver);
     }
 
-    public FilterResultPage filterByName(String name){
-        wait = new WebDriverWait(driver,10);
+    public FilterResultPage filterByName(String name) {
+        wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(filter)).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(nameFilter)).sendKeys(name);
         element = driver.findElement(applyFilter);
@@ -57,25 +62,39 @@ public class ProductsPage {
         return new FilterResultPage(driver);
     }
 
-    public FilterResultPage filterBygroup(String groupName){
+    public FilterResultPage filterBygroup(String groupName) {
         String text = null;
         wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(filter)).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(groupFilter)).click();
         List<WebElement> elements = wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(groupChoice, 0));
-        for (int i = 0; i < elements.size(); i++ ){
+        for (int i = 0; i < elements.size(); i++) {
             text = elements.get(i).getText();
-            if(text.equals(groupName)){
+            if (text.equals(groupName)) {
                 elements.get(i).click();
             }
         }
         element = driver.findElement(applyFilter);
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView(true);", element);
-        JavascriptExecutor jse = (JavascriptExecutor)driver;
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript("document.getElementsByClassName('btn-apply')[0].focus();");
         wait.until(ExpectedConditions.elementToBeClickable(applyFilter)).click();
         return new FilterResultPage(driver);
+    }
+
+    public void changeToKanbanView(){
+        wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(kanban)).click();
+    }
+
+    public boolean checkKanbanView(){
+        return driver.findElement(kanbanCard).isDisplayed();
+    }
+
+    public void changeToListView(){
+        wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(list)).click();
     }
 
 }

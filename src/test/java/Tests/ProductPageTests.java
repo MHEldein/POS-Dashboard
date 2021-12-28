@@ -46,4 +46,20 @@ public class ProductPageTests extends TestsBase {
         productsPage = homePage.navToProducts();
         productsPage.filterBygroup("جروبزيييي");
     }
+
+    @Test
+    public void verifyProductKanbanView(){
+        homePage = loginPage.login("admin", "P@ssw0rd");
+        productsPage = homePage.navToProducts();
+        productsPage.changeToKanbanView();
+        assertTrue(productsPage.checkKanbanView());
+    }
+
+    @Test
+    public void verifyChangelistView(){
+        homePage = loginPage.login("admin", "P@ssw0rd");
+        productsPage = homePage.navToProducts();
+        productsPage.changeToKanbanView();
+        productsPage.changeToListView();
+    }
 }
