@@ -14,7 +14,7 @@ public class ProductsPage {
     private WebDriver driver;
     private WebElement element;
     private By title = By.className("page-title");
-    private By addProduct = By.className("list-add-btn");
+    private By addProduct = By.className("addnow");
     private By filter = By.className("btn-filter");
     private By codeFilter = By.name("Code");
     private By nameFilter = By.name("Name");
@@ -63,14 +63,12 @@ public class ProductsPage {
     }
 
     public FilterResultPage filterBygroup(String groupName) {
-        String text = null;
         wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(filter)).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(groupFilter)).click();
         List<WebElement> elements = wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(groupChoice, 0));
         for (int i = 0; i < elements.size(); i++) {
-            text = elements.get(i).getText();
-            if (text.equals(groupName)) {
+            if (elements.get(i).equals(groupName)) {
                 elements.get(i).click();
             }
         }

@@ -80,9 +80,8 @@ public class HomePage {
 
     public GeneralSettings NavToGeneralSettings() {
         wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(management));
-        driver.findElement(management).click();
-        driver.findElement(generalSettings).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(management)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(generalSettings)).click();
         return new GeneralSettings(driver);
     }
 
@@ -136,7 +135,7 @@ public class HomePage {
     }
 
     public ProductsPage navToProducts() {
-        wait = new WebDriverWait(driver, 10);
+        wait = new WebDriverWait(driver, 60);
         wait.until(ExpectedConditions.visibilityOfElementLocated(menu)).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(products)).click();
         return new ProductsPage(driver);
